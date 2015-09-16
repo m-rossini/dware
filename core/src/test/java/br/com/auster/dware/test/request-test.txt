@@ -1,0 +1,6 @@
+r1f1;reqt;r1f3;r1f4;r1f5
+r2f1;acct;r2f3;r2f4;r2f5
+r3f1;atts;r3f3;r3f4;r3f5
+r6f1;reqt;r6f3;r6f4;r6f5
+r4f1;acct;r4f3;r4f4;r4f5
+r5f1;reqt;r5f3;r5f4;r5f5

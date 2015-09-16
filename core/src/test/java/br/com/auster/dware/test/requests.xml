@@ -1,0 +1,34 @@
+<?xml version = "1.0" encoding = "ISO-8859-1"?>
+<dware>
+  
+  <requests:configuration xmlns:requests="http://www.auster.com.br/dware/requests/">
+    <builder-chain name="test-chain">
+      <builder name="teste-1" 
+        class-name="br.com.auster.dware.request.file.FileRequestBuilder">
+        <config bufferSize="262244" encoding="ISO-8859-1" maxRecordSize="1024" field-delimiter=";">
+          <record-key index="2" new-request-pattern="reqt"/>
+          <request-key record-key-pattern="reqt">
+            <field name="campo-3" index="3"/>
+          </request-key>
+          <record key="atts">
+            <field name="campo-1" index="1"/>
+          </record>
+        </config>
+      </builder>
+    </builder-chain>
+  </requests:configuration>
+  
+  <log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+    <appender name="CONSOLE" class="org.apache.log4j.ConsoleAppender">
+      <param name="Threshold" value="DEBUG"/>
+      <layout class="org.apache.log4j.PatternLayout">
+        <param name="ConversionPattern" value="%d{ABSOLUTE} %-5p [(%c{1}) %t] %m%n"/>
+      </layout>
+    </appender>
+    <root>
+      <priority value="debug"/>
+      <appender-ref ref="CONSOLE"/>
+    </root>
+  </log4j:configuration>
+  
+</dware>

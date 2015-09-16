@@ -1,0 +1,84 @@
+<?xml version = "1.0" encoding="UTF-8"?>
+<data-aware>
+	<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+
+	   <appender name="CONSOLE" class="org.apache.log4j.ConsoleAppender">
+		  <param name="Target" value="System.out"/>
+		  <param name="Threshold" value="DEBUG"/>
+				<layout class="org.apache.log4j.PatternLayout">
+					<param name="ConversionPattern" value="%d{ABSOLUTE} %-5p [%c{1}.%M(%L) %t] %m%n" />
+				</layout>
+	   </appender>
+
+		<root>
+			<priority value="INFO" />
+			<appender-ref ref="CONSOLE" />
+		</root>
+	</log4j:configuration>
+
+	
+	<requests:configuration xmlns:requests="http://www.auster.com.br/dware/requests/">
+		
+		<builder name="bgh" class-name="br.com.auster.dware.request.file.FileRequestBuilder">
+			<config bufferSize="262244" encoding="ISO-8859-1" maxRecordSize="2048" record-delimiter="\n"
+				field-delimiter="^" request-create-type="FileRequest">
+				<record-key index="1" position="1" length="8" trim="false" new-request-pattern="00000000" />
+				<request-key record-key-pattern="00000000">
+					<field name="key" index="9" position="1" length="8" type="java.lang.String" />
+				</request-key>
+				<record key="00000000">
+					<field name="accountNumber" index="8" />
+				</record>
+			</config>
+		</builder>
+		<builder-chain name="default">
+			<builder name="bgh" />
+		</builder-chain>
+	</requests:configuration>
+
+	<dw:configuration name="invoice" xmlns:dw="http://www.auster.com.br/dware/">
+
+		<dw:mbean mbean-component="DataAware" mbean-class-name="br.com.auster.dware.monitor.dware.JMXDWare"
+			pass-reference="true" />
+
+		<dw:graph-manager>
+
+			<dw:mbean mbean-component="GraphManager"
+				mbean-class-name="br.com.auster.dware.monitor.manager.JMXGraphManager" pass-reference="true" />
+
+			<dw:mbean mbean-component="graph" mbean-class-name="br.com.auster.dware.monitor.graph.JMXGraph"
+				pass-reference="true" />
+
+			<dw:local-graph-group name="local-1" max-graphs="5" max-weight="-1">
+				<dw:mbean mbean-component="PriorityQueueWishGraphGroup"
+					mbean-class-name="br.com.auster.dware.monitor.manager.JMXPriorityWishGraphGroup" pass-reference="true" />
+			</dw:local-graph-group>
+
+			<dw:request-forwarder class-name="br.com.auster.dware.manager.FIFOQueueReqForwarder" />
+			
+		</dw:graph-manager>
+
+		<dw:graph-design idle-timeout="10">
+			
+			<finish-listener class-name="br.com.auster.dware.interrupt.DummyFinishListener">
+				 <config/>
+			</finish-listener>
+				
+			<dw:filter name="InputFromFile" class-name="br.com.auster.dware.filter.PartialInputFromFileList">
+				<dw:config buffer-size="16384" file-cache-size="10" />
+				<dw:connect-to name="Pipe" />
+			</dw:filter>
+
+			<dw:filter name="Pipe" class-name="br.com.auster.dware.filter.PipeFilter">
+				<dw:connect-to name="Sleep" />
+			</dw:filter>
+
+			<dw:filter name="Sleep" class-name="br.com.auster.dware.interrupt.ThreadSleepFilter">
+				<dw:config sleep="10"/>
+			</dw:filter>
+			
+		</dw:graph-design>
+	</dw:configuration>
+
+</data-aware>
+

@@ -1,0 +1,14 @@
+
+*****************************
+**
+**  IMPORTANT
+**
+*****************************
+
+
+  Remember that whenever this project is released, the JDK 1.4 version (aka backported-data-aware) needs to be released too. And, make sure they share the same version number.
+
+
+
+
+Auster Solutions

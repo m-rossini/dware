@@ -1,0 +1,17 @@
+<configuration case-sensitive="false">
+
+	<request-key delimiter="_">
+		<field path="/SIRS/CYCLE_SUMMARY@AccountNumber"/>
+		<field path="/SIRS/CYCLE_SUMMARY@DueDate"/>
+		<field path="/SIRS/CYCLE_SUMMARY@ACDC"/>
+	</request-key>
+	
+	<request-attrs>
+		<attribute name="invoice.account" path="/SIRS/CYCLE_SUMMARY@AccountNumber"/>
+		<attribute name="invoice.date" path="/SIRS/CYCLE_SUMMARY@DueDate"/>
+		<attribute name="cycle.code" path="/SIRS/CYCLE_SUMMARY@CycleCode"/>
+		<attribute name="cycle.date" path="/SIRS/CYCLE_SUMMARY@CycleEndDate"/>
+		<attribute name="cycle.time" path="/SIRS/CYCLE_SUMMARY@ACDC"/>
+	</request-attrs>
+
+</configuration>

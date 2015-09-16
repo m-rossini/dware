@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<configuration>
+	<xml-paths>
+		<path value="/contacts/contact" handler="br.com.auster.dware.sax.CounterContentHandler"/>
+		<path value="/contacts/contact/name" handler="br.com.auster.dware.sax.IgnoreEventsContentHandler"/>
+		<path value="/contacts/contact/telephones/home" handler="br.com.auster.dware.sax.IgnoreEventsContentHandler"/>
+		<path value="/contacts/contact/email" handler="br.com.auster.dware.sax.IgnoreEventsContentHandler"/>
+		<path value="/contacts/invalid" handler="br.com.auster.dware.sax.IgnoreEventsContentHandler"/>
+	</xml-paths>
+</configuration>

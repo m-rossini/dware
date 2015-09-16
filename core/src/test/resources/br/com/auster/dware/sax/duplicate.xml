@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<configuration>
+	<xml-paths>
+		<path value="/contacts/contact" handler="br.com.auster.dware.sax.CounterContentHandler"/>
+		<path value="/contacts/contact/" handler="br.com.auster.dware.sax.IgnoreEventsContentHandler"/>
+	</xml-paths>
+</configuration>

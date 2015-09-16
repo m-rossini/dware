@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<config bufferSize="16384" encoding="ISO-8859-1" maxRecordSize="128">
+  <record-key position="1" length="4" trim="false" new-request-pattern="INIT"/>
+  <request-key record-key-pattern="INIT">
+	<field name="key" position="6" length="10" type="java.lang.String"/>
+  </request-key>
+  <record key="INIT">
+	<field name="account" position="6" length="10"/>
+  </record>
+  <record key="INVC">
+	<field name="invoiceDate" position="6" length="8"/>
+	<field name="totalAmount" position="15" length="14"/>
+  </record>
+  <static-attributes>
+	  <static name="static1" type="java.lang.Integer">10</static>
+	  <static name="static2" type="java.lang.Void">Static Info</static>
+  </static-attributes>
+</config>

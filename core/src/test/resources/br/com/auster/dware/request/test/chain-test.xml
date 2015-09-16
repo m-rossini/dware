@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<requests:configuration xmlns:requests="http://www.auster.com.br/dware/requests/">
+
+	<builder name="test1" class-name="br.com.auster.dware.request.file.FileRequestBuilder">
+		<config bufferSize="16384" encoding="ISO-8859-1" maxRecordSize="65536">
+		  <record-key position="1" length="4" trim="false" new-request-pattern="INIT"/>
+		  <request-key record-key-pattern="INIT">
+			<field name="key" position="6" length="10" type="java.lang.String"/>
+		  </request-key>
+		  <record key="INIT">
+			<field name="account" position="6" length="10"/>
+		  </record>
+		  <record key="INVC">
+			<field name="invoiceDate" position="6" length="8"/>
+			<field name="totalAmount" position="15" length="14"/>
+		  </record>
+		  <static-attributes>
+			  <static-list name="format" type="java.util.ArrayList" element-type="java.lang.String">
+				  <value>test1.format</value>
+			  </static-list>
+		  </static-attributes>
+		</config>
+    </builder>
+	
+	<builder name="test2" class-name="br.com.auster.dware.request.file.FileRequestBuilder">
+		<config bufferSize="16384" encoding="ISO-8859-1" maxRecordSize="65536">
+		  <record-key position="1" length="1" new-request-pattern="*"/>
+		  <request-key record-key-pattern="*">
+			<field name="key" position="1" length="10" type="java.lang.String"/>
+		  </request-key>
+		  <static-attributes>
+			  <static-list name="format" type="java.util.ArrayList" element-type="java.lang.String">
+				  <value>test2.format</value>
+			  </static-list>
+		  </static-attributes>
+		</config>
+	</builder>
+	<builder-chain name="default">
+		<builder name="test1" filter-class="br.com.auster.dware.request.HashRequestFilter"/>
+		<builder name="test2" filter-class="br.com.auster.dware.request.UnionHashRequestFilter"/>
+    </builder-chain>
+	</requests:configuration>
